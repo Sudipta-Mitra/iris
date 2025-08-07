@@ -7,13 +7,12 @@
         body {
             font-family: Arial, sans-serif;
             padding: 40px;
-            background-color: #f4f4f4;
+            background-color: #f9f9f9;
             max-width: 600px;
             margin: auto;
         }
         h1 {
             text-align: center;
-            color: #333;
         }
         textarea {
             width: 100%;
@@ -22,54 +21,47 @@
             font-size: 16px;
         }
         button {
-            display: block;
             width: 100%;
-            padding: 12px;
-            background-color: #007bff;
-            color: white;
+            padding: 10px;
             font-size: 16px;
-            border: none;
             margin-top: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
             cursor: pointer;
-        }
-        button:hover {
-            background-color: #0056b3;
         }
         .result {
             margin-top: 20px;
-            font-size: 18px;
-            font-weight: bold;
             text-align: center;
+            font-size: 18px;
         }
     </style>
 </head>
 <body>
 
     <h1>Sentiment Analysis</h1>
-
     <form id="sentiment-form">
-        <textarea id="text-input" placeholder="Enter your text here..."></textarea>
-        <button type="submit">Analyze Sentiment</button>
+        <textarea id="text-input" placeholder="Enter text here..."></textarea>
+        <button type="submit">Analyze</button>
     </form>
 
     <div class="result" id="result"></div>
 
     <script>
-        const form = document.getElementById('sentiment-form');
-        const resultDiv = document.getElementById('result');
-
-        form.addEventListener('submit', async (e) => {
+        document.getElementById('sentiment-form').addEventListener('submit', async function(e) {
             e.preventDefault();
             const text = document.getElementById('text-input').value;
 
             const response = await fetch('/predict', {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
+                headers: {
+                    'Content-Type': 'application/json'
+                },
                 body: JSON.stringify({ text: text })
             });
 
             const data = await response.json();
-            resultDiv.textContent = "Prediction: " + data.prediction;
+            document.getElementById('result').innerText = "Prediction: " + data.prediction;
         });
     </script>
 
