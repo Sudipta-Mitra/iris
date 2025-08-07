@@ -1,22 +1,16 @@
-from flask import Flask, request, jsonify, render_template
+import streamlit as st
 import pickle
 
-app = Flask(__name__)
-
-# Load the model
-with open('sentiment_model.pkl', 'rb') as f:
+# Load model
+with open("sentiment_model.pkl", "rb") as f:
     model = pickle.load(f)
 
-@app.route('/')
-def index():
-    return render_template('index.html')
+st.title("Sentiment Analysis App")
+text = st.text_area("Enter text to analyze sentiment:")
 
-@app.route('/predict', methods=['POST'])
-def predict():
-    data = request.get_json()
-    text = data['text']
-    prediction = model.predict([text])
-    return jsonify({'prediction': str(prediction[0])})
-
-if __name__ == '__main__':
-    app.run(debug=True)
+if st.button("Predict"):
+    if text:
+        result = model.predict([text])[0]
+        st.success(f"Sentiment: {result}")
+    else:
+        st.warning("Please enter some text.")
