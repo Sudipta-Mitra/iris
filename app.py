@@ -4,7 +4,7 @@ import pickle
 app = Flask(__name__)
 
 # Load model
-with open('model.pkl', 'rb') as f:
+with open('sentiment_model.pkl', 'rb') as f:
     model = pickle.load(f)
 
 @app.route('/')
