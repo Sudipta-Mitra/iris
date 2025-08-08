@@ -54,7 +54,7 @@ st.markdown("<h4 style='color:#444;'>📝 Enter your movie review:</h4>", unsafe
 user_input = st.text_area("", height=200, placeholder="Ex: The movie was outstanding, truly a masterpiece!", key="input_area")
 
 # Predict button
-predict_button = st.button("🔮 Predict Sentiment")
+predict_button = st.button("Predict Sentiment")
 
 if predict_button:
     if user_input.strip() == "":
@@ -65,15 +65,16 @@ if predict_button:
         prediction = model.predict(vectorized_input)
 
         if prediction[0] == 1:
-            st.success("🎉 This review is **Positive**! 😀")
+            st.success(" This review is **Positive**")
             st.balloons()
         else:
-            st.error("💔 This review is **Negative**. 😞")
+            st.error(" This review is **Negative**")
 
 # Footer
 st.markdown("""
     <hr>
     <div style="text-align:center; color: grey;">
-        <p>Made with ❤️ by Navya | Portfolio Project 2025</p>
+        <p>Made by Sudipta | Ardent Project 2025</p>
     </div>
+
 """, unsafe_allow_html=True)
