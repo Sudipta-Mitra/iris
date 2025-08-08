@@ -1,2 +1,4 @@
-flask
+streamlit
+nltk
+joblib
 scikit-learn
